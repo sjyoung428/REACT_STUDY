@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Article from "./components/Article";
 import Create from "./components/Create";
 import Delete from "./components/Delete";
@@ -16,6 +16,7 @@ function App() {
     { id: 3, title: "javascript", body: "javascript is..." },
   ]);
   const [nextId, setNextId] = useState(4);
+  // const nextId = useRef(4);
   const onTakeId = (id: string) => {
     setArticleId(id);
   };
@@ -33,8 +34,10 @@ function App() {
   };
 
   const onCreate = (title: string, body: string) => {
-    setTopics([...topics, { id: nextId, title, body }]);
+    setTopics([...topics, { id: +nextId, title, body }]);
     setNextId((prevId) => prevId + 1);
+    // nextId.current += 1;
+    // console.log(topics);
   };
 
   const onUpdate = (title: string, body: string, id: number) => {
