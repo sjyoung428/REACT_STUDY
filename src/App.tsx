@@ -10,6 +10,7 @@ function App() {
   const [articleId, setArticleId] = useState("");
   const [isCreate, setIsCreate] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isDelete, setIsDelete] = useState(false);
   const [topics, setTopics] = useState([
     { id: 1, title: "html", body: "html is..." },
     { id: 2, title: "css", body: "css is..." },
@@ -65,6 +66,7 @@ function App() {
         topics={topics}
         setIsCreate={setIsCreate}
         setIsUpdate={setIsUpdate}
+        setIsDelete={setIsDelete}
       ></Nav>
       <Article
         articleId={articleId}
@@ -89,11 +91,16 @@ function App() {
                 Update
               </a>
               <div>
-                <Delete
-                  articleId={articleId}
-                  topics={topics}
-                  setTopics={setTopics}
-                />
+                {isDelete && (
+                  <Delete
+                    articleId={articleId}
+                    topics={topics}
+                    setTopics={setTopics}
+                    setArticleId={setArticleId}
+                    setIsCreate={setIsCreate}
+                    setIsUpdate={setIsUpdate}
+                  />
+                )}
               </div>
             </>
           </li>

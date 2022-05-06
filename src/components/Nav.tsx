@@ -12,6 +12,7 @@ interface INav extends ITopics {
   onTakeId: Function;
   setIsCreate: Function;
   setIsUpdate: Function;
+  setIsDelete: Function;
 }
 
 export default function Nav({
@@ -19,6 +20,7 @@ export default function Nav({
   onTakeId,
   setIsCreate,
   setIsUpdate,
+  setIsDelete,
 }: INav) {
   const onNavClick = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -28,6 +30,7 @@ export default function Nav({
     onTakeId(id);
     setIsCreate(false);
     setIsUpdate(false);
+    setIsDelete(true);
   };
   return (
     <nav>

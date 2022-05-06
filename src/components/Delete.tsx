@@ -4,9 +4,19 @@ interface IDelete {
   articleId: string;
   topics: ITopic[];
   setTopics: Function;
+  setArticleId: Function;
+  setIsCreate: Function;
+  setIsUpdate: Function;
 }
 
-export default function Delete({ articleId, topics, setTopics }: IDelete) {
+export default function Delete({
+  articleId,
+  topics,
+  setTopics,
+  setArticleId,
+  setIsCreate,
+  setIsUpdate,
+}: IDelete) {
   const onDeleteClick = () => {
     let newTopics = [];
     for (let i = 0; i < topics.length; i++) {
@@ -15,6 +25,9 @@ export default function Delete({ articleId, topics, setTopics }: IDelete) {
       }
     }
     setTopics(newTopics);
+    setArticleId(false);
+    setIsCreate(false);
+    setIsUpdate(false);
   };
   return (
     <>
