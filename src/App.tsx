@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Test from "./Test";
 
 function App() {
   const [timeStamp, setTimeStamp] = useState(Date.now());
@@ -14,6 +15,7 @@ function App() {
       <span> {new Date(timeStamp).toLocaleTimeString("it-IT")} </span>
       <br />
       <hr />
+      <Test />
     </>
   );
 }
