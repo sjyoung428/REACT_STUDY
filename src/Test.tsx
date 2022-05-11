@@ -8,6 +8,7 @@ function Test() {
     setInterval(() => setTimeStamp(Date.now()), 1000);
     Convert();
   }, [timeStamp]);
+
   const Convert = () => {
     const timeArr = [];
     const year = new Date(timeStamp).toLocaleDateString();
