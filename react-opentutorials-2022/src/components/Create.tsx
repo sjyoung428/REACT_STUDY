@@ -9,12 +9,6 @@ export default function Create({ onCreate }: ICreate) {
   const bodyTextarea = useRef<HTMLTextAreaElement>(null);
   const onCreateSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // const {
-    //   currentTarget: {
-    //     title: { value: title },
-    //     body: { value: body },
-    //   },
-    // } = event;
     const title = titleInput.current?.value;
     const body = bodyTextarea.current?.value;
     onCreate(title, body);

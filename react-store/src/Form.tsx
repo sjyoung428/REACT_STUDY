@@ -2,12 +2,14 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useStore } from "./store/store";
 
 const Form = () => {
-  const { register, handleSubmit, watch, reset } = useForm();
+  const { register, handleSubmit, watch, reset, resetField } = useForm();
   const { setText, setName } = useStore();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setText(data.text);
     setName(data.name);
+    resetField("name");
+    resetField("text");
   };
   const onReset = () => {
     reset();

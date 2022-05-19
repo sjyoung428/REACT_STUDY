@@ -5,8 +5,9 @@ function App() {
   const [timeStamp, setTimeStamp] = useState(Date.now());
 
   useEffect(() => {
-    setInterval(() => setTimeStamp(Date.now()), 1000);
-    console.log("hi");
+    const time = setInterval(() => setTimeStamp(Date.now()), 1000);
+    console.log("App");
+    return () => clearInterval(time);
   }, []);
   return (
     <>

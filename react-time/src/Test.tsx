@@ -5,8 +5,10 @@ function Test() {
   const [time, setTime] = useState<string[]>();
 
   useEffect(() => {
-    setInterval(() => setTimeStamp(Date.now()), 1000);
+    const time = setInterval(() => setTimeStamp(Date.now()), 1000);
     Convert();
+    console.log("Test");
+    return () => clearInterval(time);
   }, [timeStamp]);
 
   const Convert = () => {
