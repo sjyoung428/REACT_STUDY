@@ -1,14 +1,41 @@
-import { useRecoilValue } from "recoil";
-import { buttonState } from "../../store/atom";
+import produce from "immer";
+import { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { buttonState, toDoListState } from "../../store/atom";
 import S from "./styled";
 
 const ToDoCreate = () => {
-  const open = useRecoilValue(buttonState);
+  const [open, setOpen] = useRecoilState(buttonState);
+  const [toDoList, setToDoList] = useRecoilState(toDoListState);
+  const { register, handleSubmit, getValues, reset } = useForm();
+  const nextId = useRef(4);
+
+  const onCreateToDo = () => {
+    if (!getValues("createToDo")) return;
+    const newToDo = getValues("createToDo");
+
+    const newToDoList = produce(toDoList, (draft) => {
+      draft.push({
+        id: nextId.current,
+        text: newToDo,
+        done: false,
+      });
+    });
+    setToDoList(newToDoList);
+    nextId.current += 1;
+    reset();
+    setOpen(false);
+  };
   return (
     <S.ToDoCreateContainer>
       {open && (
-        <S.ToDoCreateForm>
-          <S.ToDoCreateInput placeholder="할 일을 입력 후, Enter 를 누르세요" />
+        <S.ToDoCreateForm onSubmit={handleSubmit(onCreateToDo)}>
+          <S.ToDoCreateInput
+            placeholder="할 일을 입력 후, Enter 를 누르세요"
+            autoFocus
+            {...register("createToDo")}
+          />
         </S.ToDoCreateForm>
       )}
     </S.ToDoCreateContainer>
