@@ -1,7 +1,7 @@
 import produce from "immer";
 import { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { buttonState, toDoListState } from "../../store/atom";
 import S from "./styled";
 

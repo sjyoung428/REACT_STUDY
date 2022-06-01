@@ -13,7 +13,12 @@ const ToDoList = () => {
         <ToDoItem text="Context 만들기" done={false} />
         <ToDoItem text="기능 구현하기" done={false} /> */}
         {toDoList.map((toDo) => (
-          <ToDoItem key={toDo.id} text={toDo.text} done={toDo.done} />
+          <ToDoItem
+            key={toDo.id}
+            id={toDo.id}
+            text={toDo.text}
+            done={toDo.done}
+          />
         ))}
       </S.ToDoListContainer>
     </>

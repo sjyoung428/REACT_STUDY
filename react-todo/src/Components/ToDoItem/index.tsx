@@ -1,19 +1,33 @@
 import S from "./styled";
 import { MdDelete, MdDone } from "react-icons/md";
+import React from "react";
+import { useRecoilState } from "recoil";
+import { toDoListState } from "../../store/atom";
+import produce from "immer";
 
 interface IToDoItem {
   text: string;
   done: boolean;
+  id: number;
 }
 
-const ToDoItem = ({ text, done }: IToDoItem) => {
+const ToDoItem = ({ text, done, id }: IToDoItem) => {
+  const [toDoList, setToDoList] = useRecoilState(toDoListState);
+
+  const onDelete = () => {
+    const deletedToDoList = produce(toDoList, (draft) => {
+      const index = draft.findIndex((toDo) => toDo.id === id);
+      if (index !== -1) draft.splice(index, 1); // immer 공식 홈페이지 참고 https://immerjs.github.io/immer/update-patterns/
+    });
+    setToDoList(deletedToDoList);
+  };
   return (
     <>
       <S.ToDoItemContainer>
         <S.ToDoCheck done={done}>{done && <MdDone />}</S.ToDoCheck>
         <S.ToDoText done={done}>{text}</S.ToDoText>
         <S.ToDoRemove>
-          <MdDelete className="delete" />
+          <MdDelete className="delete" onClick={onDelete} />
         </S.ToDoRemove>
       </S.ToDoItemContainer>
     </>
