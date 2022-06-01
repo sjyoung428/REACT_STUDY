@@ -1,11 +1,24 @@
+import { useRecoilValue } from "recoil";
+import { toDoListState } from "../../store/atom";
 import S from "./styled";
 
 const ToDoHead = () => {
+  const toDoList = useRecoilValue(toDoListState);
+  const countList = toDoList.filter((toDo) => toDo.done === false);
+
+  const today = new Date();
+  const dateString = today.toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+  const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
+
   return (
     <S.ToDoHeadContainer>
-      <S.ToDoDate>2022년 06월 01일</S.ToDoDate>
-      <S.ToDoDay>수요일</S.ToDoDay>
-      <S.ToDoLeft>할 일 2개 남음</S.ToDoLeft>
+      <S.ToDoDate>{dateString}</S.ToDoDate>
+      <S.ToDoDay>{dayName}</S.ToDoDay>
+      <S.ToDoLeft>할 일 {countList.length}개 남음</S.ToDoLeft>
     </S.ToDoHeadContainer>
   );
 };

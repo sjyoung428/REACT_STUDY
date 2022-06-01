@@ -9,7 +9,7 @@ const ToDoCreate = () => {
   const [open, setOpen] = useRecoilState(buttonState);
   const [toDoList, setToDoList] = useRecoilState(toDoListState);
   const { register, handleSubmit, getValues, reset } = useForm();
-  const nextId = useRef(4);
+  const nextId = useRef(5);
 
   const onCreateToDo = () => {
     if (!getValues("createToDo")) return;

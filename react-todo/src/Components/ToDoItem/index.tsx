@@ -21,10 +21,22 @@ const ToDoItem = ({ text, done, id }: IToDoItem) => {
     });
     setToDoList(deletedToDoList);
   };
+
+  const onClick = () => {
+    const clickedToDo = produce(toDoList, (draft) => {
+      const index = draft.findIndex((toDo) => toDo.id === id);
+      draft[index].done = !draft[index].done;
+    });
+    console.log(toDoList);
+    setToDoList(clickedToDo);
+  };
+
   return (
     <>
       <S.ToDoItemContainer>
-        <S.ToDoCheck done={done}>{done && <MdDone />}</S.ToDoCheck>
+        <S.ToDoCheck onClick={onClick} done={done}>
+          {done && <MdDone />}
+        </S.ToDoCheck>
         <S.ToDoText done={done}>{text}</S.ToDoText>
         <S.ToDoRemove>
           <MdDelete className="delete" onClick={onDelete} />
