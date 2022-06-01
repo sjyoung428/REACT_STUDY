@@ -27,7 +27,6 @@ const ToDoItem = ({ text, done, id }: IToDoItem) => {
       const index = draft.findIndex((toDo) => toDo.id === id);
       draft[index].done = !draft[index].done;
     });
-    console.log(toDoList);
     setToDoList(clickedToDo);
   };
 

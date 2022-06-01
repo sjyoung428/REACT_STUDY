@@ -6,7 +6,6 @@ function App() {
 
   useEffect(() => {
     const time = setInterval(() => setTimeStamp(Date.now()), 1000);
-    console.log("App");
     return () => clearInterval(time);
   }, []);
   return (
